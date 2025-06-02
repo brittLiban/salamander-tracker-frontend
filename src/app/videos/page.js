@@ -1,16 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Box,
-  CircularProgress,
-} from '@mui/material';
+import { Typography, Box, Button, CircularProgress, Stack } from '@mui/material';
 import Link from 'next/link';
 
 export default function VideoChooserPage() {
@@ -18,7 +9,7 @@ export default function VideoChooserPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/videos')
+    fetch('http://localhost:3000/api/videos') 
       .then(res => res.json())
       .then(data => {
         setVideos(data);
@@ -39,37 +30,26 @@ export default function VideoChooserPage() {
   }
 
   return (
-    <Box mt={4}>
+    <Box mt={4} px={4}>
       <Typography variant="h4" gutterBottom>
-        🎥 Salamander Videos
+        Salamander Videos
       </Typography>
 
-      <Grid container spacing={3}>
+      <Stack spacing={2}>
         {videos.map((video, idx) => (
-          <Grid item xs={12} sm={6} md={4} key={idx}>
-            <Card>
-              <CardMedia
-                component="video"
-                src={`/videos/${video.filename}`} // Place .mp4 files in public/videos/
-                height="200"
-                controls
-              />
-              <CardContent>
-                <Typography variant="h6">{video.title}</Typography>
-                <Button
-                  component={Link}
-                  href={`/preview/${video.filename}`}
-                  variant="outlined"
-                  size="small"
-                  sx={{ mt: 1 }}
-                >
-                  Preview
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Box key={idx} display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="body1">{video.filename || video}</Typography>
+            <Button
+              component={Link}
+              href={`/preview/${video.filename || video}`}
+              variant="outlined"
+              size="small"
+            >
+              Preview
+            </Button>
+          </Box>
         ))}
-      </Grid>
+      </Stack>
     </Box>
   );
 }
