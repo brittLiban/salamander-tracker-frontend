@@ -9,7 +9,7 @@ export default function VideoChooserPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/videos') 
+    fetch('http://localhost:3001/api/videos') 
       .then(res => res.json())
       .then(data => {
         setVideos(data);
