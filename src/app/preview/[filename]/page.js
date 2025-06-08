@@ -5,6 +5,18 @@ import Link from 'next/link';
 
 export default function PreviewPage({ params }) {
   const { filename } = params;
+  const [thumbnailUrl, setThumbnailUrl] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/thumbnail/${filename}`) 
+    //translate to json 
+      .then(res => res.json())
+        .then(data => {
+          setThumbnailUrl(data);
+        })
+      }).catch(err => {
+        console.error('Error fetching thumbnail:', err);
+      });
 
   return (
     <Box mt={5}>
