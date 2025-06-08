@@ -33,7 +33,7 @@ export default function PreviewPage() {
       .catch(err => {
         console.error('Error fetching thumbnail:', err);
       });
-      //run this fetch again only if the filename changes
+    //run this fetch again only if the filename changes
   }, [filename]);
 
   const handleColorPick = (color) => {
@@ -54,7 +54,7 @@ export default function PreviewPage() {
       {thumbnailUrl && (
         <>
           <ImageColorPicker
-          //how were loading the img and picking the color
+            //how were loading the img and picking the color
             imgSrc={thumbnailUrl}
             onColorPick={handleColorPick}
             zoom={1}
@@ -63,22 +63,22 @@ export default function PreviewPage() {
       )}
 
       {/* container that holds the information for the selected color */}
-      {selectedColor && (
-        <Box mt={2}>
-          <Typography>
-            Selected Color: <span style={{ color: selectedColor }}>{selectedColor}</span>
-          </Typography>
-          <Box
-            sx={{
-              width: 50,
-              height: 50,
-              backgroundColor: selectedColor,
-              border: '1px solid #000',
-              mt: 1,
-            }}
-          />
-        </Box>
-      )}
+      <Box mt={2}>
+        <Typography>
+          Selected Color: <span style={{ color: selectedColor || '#000' }}>
+            {selectedColor || 'None'}
+          </span>
+        </Typography>
+        <Box
+          sx={{
+            width: 50,
+            height: 50,
+            backgroundColor: selectedColor || '#000',
+            border: '1px solid #000',
+            mt: 1,
+          }}
+        />
+      </Box>
     </Box>
   );
 }
