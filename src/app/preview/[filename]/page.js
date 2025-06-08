@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import { useParams } from 'next/navigation';
+import { Slider } from '@mui/material';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the color picker for client-side only rendering
@@ -17,6 +18,8 @@ export default function PreviewPage() {
 
   const [thumbnailUrl, setThumbnailUrl] = useState();
   const [selectedColor, setSelectedColor] = useState(null);
+  const [threshold, setThreshold] = useState(50); // default 2 50
+
 
   useEffect(() => {
     //fetch req for the thumb img
@@ -79,6 +82,19 @@ export default function PreviewPage() {
           }}
         />
       </Box>
+      {/* Threshold Slider */}
+      <Box width={200}>
+        <Typography gutterBottom>Threshold: {threshold}</Typography>
+        <Slider
+          value={threshold}
+          onChange={(e, newValue) => setThreshold(newValue)}
+          aria-label="Threshold"
+          valueLabelDisplay="auto"
+          min={1}
+          max={100}
+        />
+      </Box>
     </Box>
+
   );
 }
