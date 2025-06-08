@@ -9,8 +9,11 @@ export default function VideoChooserPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    //when the page is loaded it will first load this data from the url
     fetch('http://localhost:3001/api/videos') 
+    //translate it to json
       .then(res => res.json())
+      //then put that data into the serVideos variable
       .then(data => {
         setVideos(data);
         setLoading(false);
@@ -36,11 +39,13 @@ export default function VideoChooserPage() {
       </Typography>
 
       <Stack spacing={2}>
+        {/* Printing out each video as a map from the server */}
         {videos.map((video, idx) => (
           <Box key={idx} display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="body1">{video.filename || video}</Typography>
             <Button
               component={Link}
+              // How we dynamically load the next page for each button
               href={`/preview/${video.filename || video}`}
               variant="outlined"
               size="small"
