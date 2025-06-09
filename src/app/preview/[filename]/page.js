@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Typography, Box } from '@mui/material';
 import { useParams } from 'next/navigation';
-import { Slider } from '@mui/material';
 import dynamic from 'next/dynamic';
+import { Typography, Box, Button, Slider } from '@mui/material';
 
 // Dynamically import the color picker for client-side only rendering
 const ImageColorPicker = dynamic(
@@ -101,21 +100,41 @@ export default function PreviewPage() {
           sx={{ mt: 4 }}
           onClick={async () => {
             const color = selectedColor?.replace('#', '');
+            if (!color || !threshold) return alert('Missing color or threshold');
+
+            console.log(" Sending color:", color);
+
             try {
               const res = await fetch(
                 `http://localhost:3001/process/${filename}?targetColor=${color}&threshold=${threshold}`,
                 { method: 'POST' }
               );
-              const data = await res.json();
+
+              //doing to grab the text being set from the back end on req.
+
+              //not sent as json for some reason :/
+              const text = await res.text();
+              let data;
+
+              try {
+                //if the text is json then it works
+                data = JSON.parse(text);
+              } catch {
+                // if not than its a error msg
+                throw new Error(text); 
+              }
+
               if (!res.ok) throw new Error(data.error || 'Failed to start job');
 
-              
+           
+              alert(`Job started!\nJob ID: ${data.jobId}`);
+
             } catch (err) {
-              alert('Error bro ' + err.message);
+              alert('Error: ' + err.message);
             }
           }}
         >
-          Start Job
+          Start Video Job
         </Button>
 
       </Box>
