@@ -10,6 +10,9 @@ export default function Navbar() {
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           Salamander Tracker
         </Typography>
+        <Button color="inherit" component={Link} href="/">
+          Home
+        </Button>
         <Button color="inherit" component={Link} href="/videos">
           Videos
         </Button>
