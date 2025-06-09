@@ -94,6 +94,31 @@ export default function PreviewPage() {
           max={100}
         />
       </Box>
+      {/* For the job */}
+      <Box width={200}>
+        <Button
+          variant="contained"
+          sx={{ mt: 4 }}
+          onClick={async () => {
+            const color = selectedColor?.replace('#', '');
+            try {
+              const res = await fetch(
+                `http://localhost:3001/process/${filename}?targetColor=${color}&threshold=${threshold}`,
+                { method: 'POST' }
+              );
+              const data = await res.json();
+              if (!res.ok) throw new Error(data.error || 'Failed to start job');
+
+              
+            } catch (err) {
+              alert('Error bro ' + err.message);
+            }
+          }}
+        >
+          Start Job
+        </Button>
+
+      </Box>
     </Box>
 
   );
