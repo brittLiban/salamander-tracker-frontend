@@ -51,6 +51,17 @@ export default function JobsPage() {
                   <TableCell>{job.threshold}</TableCell>
                   <TableCell>
                     #{job.targetColor}
+                    <Box
+                      component="span"
+                      sx={{
+                        display: 'inline-block',
+                        ml: 1,
+                        width: 14,
+                        height: 14,
+                        border: '1px solid #000',
+                        backgroundColor: `#${job.targetColor}`,
+                      }}
+                    />
                   </TableCell>
                   <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
                 </TableRow>
