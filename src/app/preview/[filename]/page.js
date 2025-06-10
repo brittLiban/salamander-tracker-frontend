@@ -44,12 +44,12 @@ export default function PreviewPage() {
     const [r, g, b] = color.match(/\d+/g).map(Number);
     //converting everything to hexacode
     return [r, g, b].map(n => n.toString(16).padStart(2, '0'))
-    //put array together
-    .join('');
+      //put array together
+      .join('');
   }
 
   const handleColorPick = (color) => {
-    
+
     console.log(' color:', color);
     setSelectedColor(color);
   };
@@ -113,40 +113,35 @@ export default function PreviewPage() {
           onClick={async () => {
             if (!selectedColor || !threshold) return alert('Missing color or threshold');
 
-            console.log("selectedColor:", selectedColor);
+            console.log("Selected color:", selectedColor);
+            console.log("Threshold:", threshold);
 
-            console.log("threshold:", threshold);
-            const hexaNum = hexaCoding(selectedColor);
-            console.log(hexaNum)
+            const hexaNum = hexaCoding(selectedColor); 
+            console.log("Sending color (hex):", hexaNum);
+
             try {
               const res = await fetch(
-                `http://localhost:3002/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
+                `http://localhost:3001/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
                 { method: 'POST' }
               );
 
-              //doing to grab the text being set from the back end on req.
-
-              //not sent as json for some reason :/
               const text = await res.text();
               let data;
 
               try {
-                //if the text is json then it works
                 data = JSON.parse(text);
               } catch {
-                // if not than its a error msg
                 throw new Error(text);
               }
 
               if (!res.ok) throw new Error(data.error || 'Failed to start job');
 
-
               alert(`Job started!\nJob ID: ${data.jobId}`);
-
             } catch (err) {
               alert('Error: ' + err.message);
             }
           }}
+
         >
           Start Video Job
         </Button>
