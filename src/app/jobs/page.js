@@ -8,10 +8,12 @@ import Link from 'next/link';
 
 //I also want the ability for someone to do it by getting the time and date
 
-export default function jobsPage(){
+export default function jobsPage() {
+    useEffect(() => {
+        fetch(`http://localhost:3001/jobs`).then(res => {
+            const jsonObj = res.json
+        })
 
-    fetch()
-    .then(res => {
-        //put all the entries into a map
     })
+
 }
