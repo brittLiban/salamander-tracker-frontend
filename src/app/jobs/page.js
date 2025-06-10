@@ -12,7 +12,7 @@ export default function JobsPage() {
   useEffect(() => {
     const getJobs = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/jobs');
+        const res = await fetch('http://localhost:3001/jobs');
         const data = await res.json();
         console.log('Fetched jobs:', data);
       } catch (err) {
@@ -21,7 +21,7 @@ export default function JobsPage() {
     };
 
     getJobs(); 
-  }, []); Run once after initial render
+  }, []);// Run once after initial render
 
   return <p>Loading jobs…</p>;
 }
