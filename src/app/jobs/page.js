@@ -42,6 +42,7 @@ export default function JobsPage() {
                 <TableCell>Threshold</TableCell>
                 <TableCell>Color</TableCell>
                 <TableCell>Submitted</TableCell>
+                <TableCell>Link</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -64,6 +65,7 @@ export default function JobsPage() {
                     />
                   </TableCell>
                   <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
+                  <TableCell>{job.id}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
