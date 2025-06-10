@@ -22,7 +22,7 @@ export default function PreviewPage() {
 
   useEffect(() => {
     //fetch req for the thumb img
-    fetch(`http://localhost:3002/thumbnail/${filename}`)
+    fetch(`http://localhost:3001/thumbnail/${filename}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load thumbnail');
         // it comes as binary so we put it in a img
@@ -105,7 +105,7 @@ export default function PreviewPage() {
           max={100}
         />
       </Box>
-      {/* For the job */}
+      {/* For the job  */}
       <Box width={200}>
         <Button
           variant="contained"
