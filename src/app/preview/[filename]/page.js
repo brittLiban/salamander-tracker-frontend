@@ -38,10 +38,26 @@ export default function PreviewPage() {
     //run this fetch again only if the filename changes
   }, [filename]);
 
+  // Helper to help digest the color being picked to send the appr hexacode for the backend
+  function rgbToHex(rgb) {
+    const result = rgb.match(/\d+/g);
+    if (!result || result.length < 3) return null;
+    return result
+      .slice(0, 3)
+      .map(n => {
+        const hex = parseInt(n).toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      })
+      .join('');
+  }
+
+
   const handleColorPick = (color) => {
-    console.log('Selected color:', color);
-    setSelectedColor(color);
+    const hex = rgbToHex(color);
+    console.log('Selected color:', hex);
+    setSelectedColor(`#${hex}`);
   };
+
 
   return (
     <Box mt={5}>
@@ -102,7 +118,9 @@ export default function PreviewPage() {
             const color = selectedColor?.replace('#', '');
             if (!color || !threshold) return alert('Missing color or threshold');
 
-            console.log(" Sending color:", color);
+            console.log("selectedColor:", selectedColor);
+            console.log("sending hex:", color);
+            console.log("threshold:", threshold);
 
             try {
               const res = await fetch(
@@ -121,12 +139,12 @@ export default function PreviewPage() {
                 data = JSON.parse(text);
               } catch {
                 // if not than its a error msg
-                throw new Error(text); 
+                throw new Error(text);
               }
 
               if (!res.ok) throw new Error(data.error || 'Failed to start job');
 
-           
+
               alert(`Job started!\nJob ID: ${data.jobId}`);
 
             } catch (err) {
