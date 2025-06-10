@@ -42,7 +42,10 @@ export default function PreviewPage() {
   const hexaCoding = (color) => {
     // to extract the number
     const [r, g, b] = color.match(/\d+/g).map(Number);
-    return [r, g, b]
+    //converting everything to hexacode
+    return [r, g, b].map(n => n.toString(16).padStart(2, '0'))
+    //put array together
+    .join('');
   }
 
   const handleColorPick = (color) => {
