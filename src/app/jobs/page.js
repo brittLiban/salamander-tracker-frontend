@@ -8,12 +8,20 @@ import Link from 'next/link';
 
 //I also want the ability for someone to do it by getting the time and date
 
-export default function jobsPage() {
-    useEffect(() => {
-        fetch(`http://localhost:3001/jobs`).then(res => {
-            const jsonObj = res.json
-        })
+export default function JobsPage() {
+  useEffect(() => {
+    const getJobs = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/api/jobs');
+        const data = await res.json();
+        console.log('Fetched jobs:', data);
+      } catch (err) {
+        console.error('Error fetching jobs:', err);
+      }
+    };
 
-    })
+    getJobs(); 
+  }, []); Run once after initial render
 
+  return <p>Loading jobs…</p>;
 }
