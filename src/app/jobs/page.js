@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Typography, Box, Button, CircularProgress, Stack, dividerClasses } from '@mui/material';
 import {
   Box, Typography, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper
-} from '@mui/material';
+  TableHead, TableRow, Paper} from '@mui/material';
 
 // How its going to work, its going to poll all the recent jobs that have been done and when someone clicks on theirs it will show its csv as well
 
@@ -29,7 +27,27 @@ export default function JobsPage() {
         getJobs();
     }, []);// Run once after initial render
 
-    return (
-       <div>jobs</div>
-    );
+      return (
+    <Box mt={5}>
+      <Typography variant="h5" gutterBottom>Job History</Typography>
+
+      {jobs.length === 0 ? (
+        <Typography>No jobs yet.</Typography>
+      ) : (
+        <TableContainer component={Paper} sx={{ maxHeight: 400, overflow: 'auto' }}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell>Video</TableCell>
+                <TableCell>Threshold</TableCell>
+                <TableCell>Color</TableCell>
+                <TableCell>Submitted</TableCell>
+              </TableRow>
+            </TableHead>
+            
+          </Table>
+        </TableContainer>
+      )}
+    </Box>
+  );
 }
