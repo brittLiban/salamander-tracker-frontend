@@ -44,7 +44,18 @@ export default function JobsPage() {
                 <TableCell>Submitted</TableCell>
               </TableRow>
             </TableHead>
-            
+            <TableBody>
+              {jobs.map(job => (
+                <TableRow key={job.id}>
+                  <TableCell>{job.videoName}</TableCell>
+                  <TableCell>{job.threshold}</TableCell>
+                  <TableCell>
+                    #{job.targetColor}
+                  </TableCell>
+                  <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
           </Table>
         </TableContainer>
       )}
