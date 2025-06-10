@@ -38,18 +38,6 @@ export default function PreviewPage() {
     //run this fetch again only if the filename changes
   }, [filename]);
 
-  // Helper to help digest the color being picked to send the appr hexacode for the backend
-  function rgbToHex(rgb) {
-    const result = rgb.match(/\d+/g);
-    if (!result || result.length < 3) return null;
-    return result
-      .slice(0, 3)
-      .map(n => {
-        const hex = parseInt(n).toString(16);
-        return hex.length === 1 ? '0' + hex : hex;
-      })
-      .join('');
-  }
 
 
   const handleColorPick = (color) => {
@@ -115,16 +103,15 @@ export default function PreviewPage() {
           variant="contained"
           sx={{ mt: 4 }}
           onClick={async () => {
-            const color = selectedColor?.replace('#', '');
+            const hexColor = selectedColor?.replace('#', '');
             if (!color || !threshold) return alert('Missing color or threshold');
 
             console.log("selectedColor:", selectedColor);
-            console.log("sending hex:", color);
             console.log("threshold:", threshold);
 
             try {
               const res = await fetch(
-                `http://localhost:3001/process/${filename}?targetColor=${color}&threshold=${threshold}`,
+                `http://localhost:3001/process/${filename}?targetColor=${hexColor}&threshold=${threshold}`,
                 { method: 'POST' }
               );
 
