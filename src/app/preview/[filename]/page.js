@@ -39,10 +39,15 @@ export default function PreviewPage() {
   }, [filename]);
 
 
+  const hexaCoding = (color) => {
+    // to extract the number
+    const [r, g, b] = color.match(/\d+/g).map(Number);
+    return r + g + b;
+  }
 
   const handleColorPick = (color) => {
-    const hex = rgbToHex(color);
-    console.log('Selected color:', hex);
+    const hexaNum = hexaCoding(color)
+    console.log('Selected color:', hexaNum);
     setSelectedColor(`#${hex}`);
   };
 
