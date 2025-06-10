@@ -111,12 +111,12 @@ export default function PreviewPage() {
           variant="contained"
           sx={{ mt: 4 }}
           onClick={async () => {
-            const color = selectedColor?.replace('#', '');
-            if (!color || !threshold) return alert('Missing color or threshold');
+            if (!selectedColor || !threshold) return alert('Missing color or threshold');
 
             console.log("selectedColor:", selectedColor);
+
             console.log("threshold:", threshold);
-            const hexaNum = hexaCoding(color);
+            const hexaNum = hexaCoding(selectedColor);
             console.log(hexaNum)
             try {
               const res = await fetch(
