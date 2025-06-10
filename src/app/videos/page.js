@@ -10,7 +10,7 @@ export default function VideoChooserPage() {
 
   useEffect(() => {
     //when the page is loaded it will first load this data from the url
-    fetch('http://localhost:3002/videos') 
+    fetch('http://localhost:3001/api/videos') 
     //translate it to json
       .then(res => res.json())
       //then put that data into the serVideos variable

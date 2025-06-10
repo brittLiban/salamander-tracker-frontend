@@ -22,7 +22,7 @@ export default function PreviewPage() {
 
   useEffect(() => {
     //fetch req for the thumb img
-    fetch(`http://localhost:3002/thumbnail/${filename}`)
+    fetch(`http://localhost:3001/thumbnail/${filename}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load thumbnail');
         // it comes as binary so we put it in a img
@@ -120,7 +120,7 @@ export default function PreviewPage() {
             console.log(hexaNum)
             try {
               const res = await fetch(
-                `http://localhost:3002/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
+                `http://localhost:3001/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
                 { method: 'POST' }
               );
 
