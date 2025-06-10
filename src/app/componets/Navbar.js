@@ -1,6 +1,6 @@
 'use client';
 
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import Link from 'next/link';
 
 export default function Navbar() {
@@ -10,12 +10,18 @@ export default function Navbar() {
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           Salamander Tracker
         </Typography>
-        <Button color="inherit" component={Link} href="/">
-          Home
-        </Button>
-        <Button color="inherit" component={Link} href="/videos">
-          Videos
-        </Button>
+
+        <Box display="flex" gap={2}>
+          <Button color="inherit" component={Link} href="/">
+            Home
+          </Button>
+          <Button color="inherit" component={Link} href="/videos">
+            Videos
+          </Button>
+          <Button color="inherit" component={Link} href="/jobs">
+            Jobs
+          </Button>
+        </Box>
       </Toolbar>
     </AppBar>
   );

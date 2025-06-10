@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import {
-  Box, Typography, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper} from '@mui/material';
+    Box, Typography, Table, TableBody, TableCell, TableContainer,
+    TableHead, TableRow, Paper
+} from '@mui/material';
+import Link from 'next/link';
 
 // How its going to work, its going to poll all the recent jobs that have been done and when someone clicks on theirs it will show its csv as well
 
@@ -27,51 +29,53 @@ export default function JobsPage() {
         getJobs();
     }, []);// Run once after initial render
 
-      return (
-    <Box mt={5}>
-      <Typography variant="h5" gutterBottom>Job History</Typography>
+    return (
+        <Box mt={5}>
+            <Typography variant="h5" gutterBottom>Job History</Typography>
 
-      {jobs.length === 0 ? (
-        <Typography>No jobs yet.</Typography>
-      ) : (
-        <TableContainer component={Paper} sx={{ maxHeight: 400, overflow: 'auto' }}>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell>Video</TableCell>
-                <TableCell>Threshold</TableCell>
-                <TableCell>Color</TableCell>
-                <TableCell>Submitted</TableCell>
-                <TableCell>Link</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {jobs.map(job => (
-                <TableRow key={job.id}>
-                  <TableCell>{job.videoName}</TableCell>
-                  <TableCell>{job.threshold}</TableCell>
-                  <TableCell>
-                    #{job.targetColor}
-                    <Box
-                      component="span"
-                      sx={{
-                        display: 'inline-block',
-                        ml: 1,
-                        width: 14,
-                        height: 14,
-                        border: '1px solid #000',
-                        backgroundColor: `#${job.targetColor}`,
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
-                  <TableCell>{job.id}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-    </Box>
-  );
+            {jobs.length === 0 ? (
+                <Typography>No jobs yet.</Typography>
+            ) : (
+                <TableContainer component={Paper} sx={{ maxHeight: 400, overflow: 'auto' }}>
+                    <Table stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Video</TableCell>
+                                <TableCell>Threshold</TableCell>
+                                <TableCell>Color</TableCell>
+                                <TableCell>Submitted</TableCell>
+                                <TableCell>Link</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {jobs.map(job => (
+                                <TableRow key={job.id}>
+                                    <TableCell>{job.videoName}</TableCell>
+                                    <TableCell>{job.threshold}</TableCell>
+                                    <TableCell>
+                                        #{job.targetColor}
+                                        <Box
+                                            component="span"
+                                            sx={{
+                                                display: 'inline-block',
+                                                ml: 1,
+                                                width: 14,
+                                                height: 14,
+                                                border: '1px solid #000',
+                                                backgroundColor: `#${job.targetColor}`,
+                                            }}
+                                        />
+                                    </TableCell>
+                                    <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
+                                    <TableCell><Link href={`/csvjson/${job.id}`} style={{ textDecoration: 'none', color: '#1976d2' }}>
+                                        View Result
+                                    </Link></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
+        </Box>
+    );
 }
