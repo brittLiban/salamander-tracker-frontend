@@ -105,7 +105,7 @@ export default function PreviewPage() {
           max={100}
         />
       </Box>
-      {/* For the job */}
+      {/* For the job  */}
       <Box width={200}>
         <Button
           variant="contained"
