@@ -42,13 +42,13 @@ export default function PreviewPage() {
   const hexaCoding = (color) => {
     // to extract the number
     const [r, g, b] = color.match(/\d+/g).map(Number);
-    return r + g + b;
+    return [r, g, b]
   }
 
   const handleColorPick = (color) => {
-    const hexaNum = hexaCoding(color)
-    console.log('Selected color:', hexaNum);
-    setSelectedColor(`#${hex}`);
+    
+    console.log(' color:', color);
+    setSelectedColor(color);
   };
 
 
@@ -108,15 +108,16 @@ export default function PreviewPage() {
           variant="contained"
           sx={{ mt: 4 }}
           onClick={async () => {
-            const hexColor = selectedColor?.replace('#', '');
+            const color = selectedColor?.replace('#', '');
             if (!color || !threshold) return alert('Missing color or threshold');
 
             console.log("selectedColor:", selectedColor);
             console.log("threshold:", threshold);
-
+            const hexaNum = hexaCoding(color);
+            console.log(hexaNum)
             try {
               const res = await fetch(
-                `http://localhost:3001/process/${filename}?targetColor=${hexColor}&threshold=${threshold}`,
+                `http://localhost:3001/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
                 { method: 'POST' }
               );
 
