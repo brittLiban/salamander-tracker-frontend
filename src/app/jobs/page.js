@@ -67,7 +67,7 @@ export default function JobsPage() {
                                         />
                                     </TableCell>
                                     <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
-                                    <TableCell><Link href={`/csvjson/${job.id}`} style={{ textDecoration: 'none', color: '#1976d2' }}>
+                                    <TableCell><Link href={`/results/${job.id}`} style={{ textDecoration: 'none', color: '#1976d2' }}>
                                         View Result
                                     </Link></TableCell>
                                 </TableRow>
