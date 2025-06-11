@@ -17,7 +17,7 @@ export default function JobsPage() {
     useEffect(() => {
         const getJobs = async () => {
             try {
-                const res = await fetch('http://localhost:3001/jobs');
+                const res = await fetch('http://localhost:3000/jobs');
                 const data = await res.json();
                 setJobs(data);
                 console.log('Fetched jobs:', data);
@@ -78,7 +78,7 @@ export default function JobsPage() {
 
 
                                         <a
-                                            href={`http://localhost:3001/results/${job.id}.csv`}
+                                            href={`http://localhost:3000/results/${job.id}.csv`}
                                             download
                                             style={{ textDecoration: 'none', color: '#1976d2' }}
                                         >
