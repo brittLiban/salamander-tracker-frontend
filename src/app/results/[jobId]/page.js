@@ -14,7 +14,7 @@ import {
   Paper
 } from '@mui/material';
 
-import { useParams } from 'next/navigation';
+
 
 
 // Lets put the results in a table again. Also make it downloadable
