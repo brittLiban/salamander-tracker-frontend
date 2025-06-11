@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
+  Button,
   Box,
   Typography,
   Table,
@@ -23,13 +24,13 @@ export default function getJobCsv(){
     const params = useParams(); //useParams() from Next.js App Router
   const { jobId } = params;
 
-    const [id, setId] = useState([]);
+    const [rows, setRows] = useState([]);
     useEffect(() => {
         const getCsv = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/csvjson/${jobId}`);
                 const data = await res.json();
-                setId(data);
+                setRows(data);
                 console.log('Fetched csv:', data);
             } catch (err) {
                 console.error('Error fetching jobs:', err);
@@ -37,6 +38,34 @@ export default function getJobCsv(){
         };
 
         getCsv();
-    }, [id]);// Run once after initial render
+    }, [jobId]);// Run after the job id
 
+      return (
+    <Box mt={5}>
+      <Typography variant="h5" gutterBottom>
+        CSV Results for Job: {jobId}
+      </Typography>
+
+      {rows.length === 0 ? (
+        <Typography>Loading or no data found.</Typography>
+      ) : (
+        <>
+          <TableContainer component={Paper} sx={{ maxHeight: 400, overflow: 'auto' }}>
+            <Table stickyHeader>
+              <TableHead>
+                <TableRow>
+                  {Object.keys(rows[0]).map((key) => (
+                    <TableCell key={key}>{key}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              
+            </Table>
+          </TableContainer>
+
+          
+        </>
+      )}
+    </Box>
+  );
 }
