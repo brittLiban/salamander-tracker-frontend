@@ -20,25 +20,27 @@ import {
 
 // Lets put the results in a table again. Also make it downloadable
 
-export default function getJobCsv() {
+export default function GetJobCsv() {
     const params = useParams(); //useParams() from Next.js App Router
     const { jobId } = params;
 
     const [rows, setRows] = useState([]);
     useEffect(() => {
-        const getCsv = async () => {
-            try {
-                const res = await fetch(`http://localhost:3001/csvjson/${jobId}`);
-                const data = await res.json();
-                setRows(data);
-                console.log('Fetched csv:', data);
-            } catch (err) {
-                console.error('Error fetching jobs:', err);
-            }
-        };
+    const fetchCsv = async () => {
+        try {
+            const res = await fetch(`http://localhost:3001/csvjson/${jobId}`);
+            const data = await res.json();
+            setRows(data);
+            console.log('Fetched csv:', data);
+        } catch (err) {
+            console.error('Error fetching jobs:', err);
+        }
+    };
 
-        getCsv();
-    }, [jobId]);// Run after the job id
+    fetchCsv(); 
+}, [jobId]);
+
+       // Run after the job id
 
     return (
         <Box mt={5}>
