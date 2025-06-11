@@ -28,7 +28,7 @@ export default function GetJobCsv() {
     useEffect(() => {
     const fetchCsv = async () => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/csvjson/${jobId}`);
+            const res = await fetch(`http://app:3001/csvjson/${jobId}`);
             const data = await res.json();
             setRows(data);
             console.log('Fetched csv:', data);
@@ -82,7 +82,7 @@ export default function GetJobCsv() {
                 <Button
                     variant="contained"
                     color="primary"
-                    href={`${process.env.NEXT_PUBLIC_API_URL}/results/${jobId}.csv`}
+                    href={`http://app:3001/results/${jobId}.csv`}
                     target="_blank"
                     rel="noopener noreferrer"
                     download
