@@ -3,16 +3,16 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
-  Button,
-  Box,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
+    Button,
+    Box,
+    Typography,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper
 } from '@mui/material';
 
 
@@ -20,9 +20,9 @@ import {
 
 // Lets put the results in a table again. Also make it downloadable
 
-export default function getJobCsv(){
+export default function getJobCsv() {
     const params = useParams(); //useParams() from Next.js App Router
-  const { jobId } = params;
+    const { jobId } = params;
 
     const [rows, setRows] = useState([]);
     useEffect(() => {
@@ -40,32 +40,40 @@ export default function getJobCsv(){
         getCsv();
     }, [jobId]);// Run after the job id
 
-      return (
-    <Box mt={5}>
-      <Typography variant="h5" gutterBottom>
-        CSV Results for Job: {jobId}
-      </Typography>
+    return (
+        <Box mt={5}>
+            <Typography variant="h5" gutterBottom>
+                CSV Results for Job: {jobId}
+            </Typography>
 
-      {rows.length === 0 ? (
-        <Typography>Loading or no data found.</Typography>
-      ) : (
-        <>
-          <TableContainer component={Paper} sx={{ maxHeight: 400, overflow: 'auto' }}>
-            <Table stickyHeader>
-              <TableHead>
-                <TableRow>
-                  {Object.keys(rows[0]).map((key) => (
-                    <TableCell key={key}>{key}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              
-            </Table>
-          </TableContainer>
+            {rows.length === 0 ? (
+                <Typography>Loading or no data found.</Typography>
+            ) : (
+                <>
+                    <TableContainer component={Paper} sx={{ maxHeight: '80vh', overflow: 'auto' }}>
+                        <Table stickyHeader>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Frame</TableCell>
+                                    <TableCell>X</TableCell>
+                                    <TableCell>Y</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell>{row.frame}</TableCell>
+                                        <TableCell>{row.x}</TableCell>
+                                        <TableCell>{row.y}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
 
-          
-        </>
-      )}
-    </Box>
-  );
+
+                </>
+            )}
+        </Box>
+    );
 }
