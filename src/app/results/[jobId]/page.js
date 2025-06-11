@@ -74,6 +74,19 @@ export default function getJobCsv() {
 
                 </>
             )}
+            {/* To Download it adhashduash uh we up */}
+            <Box mt={2}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    href={`http://localhost:3001/results/${jobId}.csv`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                >
+                    Download CSV
+                </Button>
+            </Box>
         </Box>
     );
 }

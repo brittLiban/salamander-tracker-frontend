@@ -45,6 +45,7 @@ export default function JobsPage() {
                                 <TableCell>Color</TableCell>
                                 <TableCell>Submitted</TableCell>
                                 <TableCell>Link</TableCell>
+                                <TableCell>Download</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -67,9 +68,23 @@ export default function JobsPage() {
                                         />
                                     </TableCell>
                                     <TableCell>{new Date(job.createdAt).toLocaleString()}</TableCell>
-                                    <TableCell><Link href={`/results/${job.id}`} style={{ textDecoration: 'none', color: '#1976d2' }}>
-                                        View Result
-                                    </Link></TableCell>
+                                    <TableCell>
+                                        <Link href={`/results/${job.id}`} style={{ textDecoration: 'none', color: '#1976d2' }}>
+                                            View Result
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell>
+                                        {/* To Download it adhashduash uh we up */}
+
+
+                                        <a
+                                            href={`http://localhost:3001/results/${job.id}.csv`}
+                                            download
+                                            style={{ textDecoration: 'none', color: '#1976d2' }}
+                                        >
+                                            Donwload
+                                        </a>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
