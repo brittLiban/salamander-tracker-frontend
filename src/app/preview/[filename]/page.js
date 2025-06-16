@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { Typography, Box, Button, Slider } from '@mui/material';
+import LiveCentroidTuner from '../../componets/LiveCentroidTuner'
 
 // Dynamically import the color picker for client-side only rendering
 const ImageColorPicker = dynamic(
@@ -92,6 +93,23 @@ export default function PreviewPage() {
             mt: 1,
           }}
         />
+
+        {/* Binarized Image Canvas */}
+    <Box>
+      <Typography variant="subtitle1" gutterBottom>Binarized Preview</Typography>
+      <LiveCentroidTuner
+        src={thumbnailUrl}
+        defaultColor={hexaCoding(selectedColor)}
+        defaultThreshold={threshold}
+      />
+    </Box>
+
+        {thumbnailUrl && selectedColor && (
+  <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', mt: 4 }}>
+    
+  </Box>
+)}
+
       </Box>
       {/* Threshold Slider */}
       <Box width={200}>
@@ -104,7 +122,14 @@ export default function PreviewPage() {
           min={1}
           max={100}
         />
+        
+
+        
       </Box>
+
+
+
+      
       {/* For the job  */}
       <Box width={200}>
         <Button
@@ -116,7 +141,7 @@ export default function PreviewPage() {
             console.log("Selected color:", selectedColor);
             console.log("Threshold:", threshold);
 
-            const hexaNum = hexaCoding(selectedColor); 
+            const hexaNum = hexaCoding(selectedColor);
             console.log("Sending color (hex):", hexaNum);
 
             try {
@@ -143,6 +168,9 @@ export default function PreviewPage() {
           }}
 
         >
+
+          
+
           Start Video Job
         </Button>
 
