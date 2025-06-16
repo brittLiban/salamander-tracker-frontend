@@ -80,15 +80,14 @@ export default function PreviewPage() {
 
     {/*Show the binarised canvas only AFTER a colour is picked */}
     {selectedColor && (
-      <Box>
-        <Typography variant="subtitle1" gutterBottom>Binarized Result</Typography>
-        <LiveCentroidTuner
-          src={thumbnailUrl}
-          defaultColor={hexaCoding(selectedColor)}
-          defaultThreshold={threshold}
-        />
-      </Box>
-    )}
+  <LiveCentroidTuner
+    /* force a brand-new component whenever colour OR threshold changes */
+    key={`${hexaCoding(selectedColor)}-${threshold}`}   
+    src={thumbnailUrl}
+    defaultColor={hexaCoding(selectedColor)}
+    defaultThreshold={threshold}
+  />
+)}
   </Box>
 )}
 
