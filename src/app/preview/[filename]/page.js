@@ -77,13 +77,25 @@ export default function PreviewPage() {
         </>
       )}
 
+        {selectedColor && (
+  <LiveCentroidTuner
+    src={thumbnailUrl}
+    defaultColor={hexaCoding(selectedColor)}
+    defaultThreshold={threshold}
+  />
+)}
+
       {/* container that holds the information for the selected color */}
       <Box mt={2}>
+
+      
         <Typography>
           Selected Color: <span style={{ color: selectedColor || '#000' }}>
             {selectedColor || 'None'}
           </span>
         </Typography>
+
+        
         <Box
           sx={{
             width: 50,
@@ -94,20 +106,8 @@ export default function PreviewPage() {
           }}
         />
 
-        {/* Binarized Image Canvas */}
-    <Box>
-      <Typography variant="subtitle1" gutterBottom>Binarized Preview</Typography>
-      <LiveCentroidTuner
-        src={thumbnailUrl}
-        defaultColor={hexaCoding(selectedColor)}
-        defaultThreshold={threshold}
-      />
-    </Box>
-
         {thumbnailUrl && selectedColor && (
-  <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', mt: 4 }}>
-    
-  </Box>
+  <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', mt: 4 }}> </Box>
 )}
 
       </Box>
