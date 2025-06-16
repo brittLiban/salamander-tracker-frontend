@@ -67,35 +67,40 @@ export default function PreviewPage() {
       </Typography>
 
       {thumbnailUrl && (
-        <>
-          <ImageColorPicker
-            //how were loading the img and picking the color
-            imgSrc={thumbnailUrl}
-            onColorPick={handleColorPick}
-            zoom={1}
-          />
-        </>
-      )}
+  <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', mt: 4 }}>
+    {/*  Always show the picker */}
+    <Box>
+      <Typography variant="subtitle1" gutterBottom>Pick a Color</Typography>
+      <ImageColorPicker
+        imgSrc={thumbnailUrl}
+        onColorPick={handleColorPick}
+        zoom={1}
+      />
+    </Box>
 
-        {selectedColor && (
-  <LiveCentroidTuner
-    src={thumbnailUrl}
-    defaultColor={hexaCoding(selectedColor)}
-    defaultThreshold={threshold}
-  />
+    {/*Show the binarised canvas only AFTER a colour is picked */}
+    {selectedColor && (
+      <Box>
+        <Typography variant="subtitle1" gutterBottom>Binarized Result</Typography>
+        <LiveCentroidTuner
+          src={thumbnailUrl}
+          defaultColor={hexaCoding(selectedColor)}
+          defaultThreshold={threshold}
+        />
+      </Box>
+    )}
+  </Box>
 )}
+
 
       {/* container that holds the information for the selected color */}
       <Box mt={2}>
-
-      
         <Typography>
           Selected Color: <span style={{ color: selectedColor || '#000' }}>
             {selectedColor || 'None'}
           </span>
         </Typography>
 
-        
         <Box
           sx={{
             width: 50,
@@ -105,12 +110,8 @@ export default function PreviewPage() {
             mt: 1,
           }}
         />
-
-        {thumbnailUrl && selectedColor && (
-  <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', mt: 4 }}> </Box>
-)}
-
       </Box>
+
       {/* Threshold Slider */}
       <Box width={200}>
         <Typography gutterBottom>Threshold: {threshold}</Typography>
@@ -122,15 +123,9 @@ export default function PreviewPage() {
           min={1}
           max={100}
         />
-        
-
-        
       </Box>
 
-
-
-      
-      {/* For the job  */}
+      {/* For the job */}
       <Box width={200}>
         <Button
           variant="contained"
@@ -166,16 +161,11 @@ export default function PreviewPage() {
               alert('Error: ' + err.message);
             }
           }}
-
         >
-
-          
-
           Start Video Job
         </Button>
-
       </Box>
     </Box>
-
   );
+
 }
