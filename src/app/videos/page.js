@@ -10,7 +10,11 @@ export default function VideoChooserPage() {
 
   useEffect(() => {
     //when the page is loaded it will first load this data from the url
+<<<<<<< HEAD
     fetch('http://localhost:3000/api/videos') 
+=======
+    fetch(`http://localhost:3001/api/videos`) 
+>>>>>>> docker
     //translate it to json
       .then(res => res.json())
       //then put that data into the serVideos variable
