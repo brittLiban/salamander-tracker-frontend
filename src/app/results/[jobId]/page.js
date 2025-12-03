@@ -83,7 +83,7 @@ export default function GetJobCsv() {
                 <Button
                     variant="contained"
                     color="primary"
-                    href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/results/${jobId}.csv`
+                    href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/results/${jobId}.csv`}
                     target="_blank"
                     rel="noopener noreferrer"
                     download
