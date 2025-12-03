@@ -96,3 +96,63 @@ Make sure these ports are available or adjust as needed. Always start the backen
 ---
 
 
+
+
+## Docker Deployment
+
+### Building the Docker Image
+
+To build the Docker image for the frontend:
+
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_API_URL=http://localhost:3001 \
+  -t salamander-tracker-frontend .
+```
+
+**Note:** Replace `http://localhost:3001` with your backend URL. This must be set at build time.
+
+### Running the Docker Container
+
+```bash
+docker run -p 3000:3000 salamander-tracker-frontend
+```
+
+The frontend will be accessible at `http://localhost:3000`.
+
+### Using with Docker Compose (Recommended)
+
+For easier orchestration of both frontend and backend, create a `docker-compose.yml` in a parent directory that contains both repositories:
+
+```yaml
+version: '3.8'
+
+services:
+  backend:
+    image: centroid-backend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./videos:/videos
+      - ./results:/results
+
+  frontend:
+    build:
+      context: ./salamander-tracker-frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+```
+
+Then run:
+
+```bash
+docker-compose up
+```
+
+---
+
+
