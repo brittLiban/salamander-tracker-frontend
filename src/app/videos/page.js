@@ -1,4 +1,5 @@
 'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import { Typography, Box, Button, CircularProgress, Stack } from '@mui/material';
@@ -9,15 +10,9 @@ export default function VideoChooserPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    //when the page is loaded it will first load this data from the url
-<<<<<<< HEAD
-    fetch('http://localhost:3000/api/videos') 
-=======
-    fetch(`http://localhost:3001/api/videos`) 
->>>>>>> docker
-    //translate it to json
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    fetch(`${API_URL}/api/videos`)
       .then(res => res.json())
-      //then put that data into the serVideos variable
       .then(data => {
         setVideos(data);
         setLoading(false);
@@ -43,13 +38,11 @@ export default function VideoChooserPage() {
       </Typography>
 
       <Stack spacing={2}>
-        {/* Printing out each video as a map from the server */}
         {videos.map((video, idx) => (
           <Box key={idx} display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="body1">{video.filename || video}</Typography>
             <Button
               component={Link}
-              // How we dynamically load the next page for each button
               href={`/preview/${video.filename || video}`}
               variant="outlined"
               size="small"

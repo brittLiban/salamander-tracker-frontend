@@ -1,0 +1,7 @@
+﻿## Notes
+
+
+* Make sure to start the backend (via Docker) before the frontend
+* Keep these ports in mind if integrating into other systems
+
+---

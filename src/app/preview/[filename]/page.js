@@ -23,7 +23,8 @@ export default function PreviewPage() {
 
   useEffect(() => {
     //fetch req for the thumb img
-    fetch(`http://localhost:3000/thumbnail/${filename}`)
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    fetch(`${API_URL}/thumbnail/${filename}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load thumbnail');
         // it comes as binary so we put it in a img
@@ -138,9 +139,10 @@ export default function PreviewPage() {
             const hexaNum = hexaCoding(selectedColor);
             console.log("Sending color (hex):", hexaNum);
 
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
             try {
               const res = await fetch(
-                `http://localhost:3000/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
+                `${API_URL}/process/${filename}?targetColor=${hexaNum}&threshold=${threshold}`,
                 { method: 'POST' }
               );
 

@@ -17,7 +17,8 @@ export default function JobsPage() {
     useEffect(() => {
         const getJobs = async () => {
             try {
-                const res = await fetch('http://localhost:3000/jobs');
+                const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+                const res = await fetch(`${API_URL}/jobs`);
                 const data = await res.json();
                 setJobs(data);
                 console.log('Fetched jobs:', data);
@@ -78,7 +79,7 @@ export default function JobsPage() {
 
 
                                         <a
-                                            href={`http://localhost:3000/results/${job.id}.csv`}
+                                            href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/results/${job.id}.csv`
                                             download
                                             style={{ textDecoration: 'none', color: '#1976d2' }}
                                         >

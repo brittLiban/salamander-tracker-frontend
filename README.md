@@ -30,7 +30,7 @@ Before running the frontend, ensure the backend is up and running. Clone and run
 
 **[Centroid Finder Backend -- Click Here](https://github.com/brittLiban/centroid-finder/tree/dockerRunner)**
 
-EXAMPLE OF A COMMAND TO run the backend on port 3000:
+Example command to run the backend (default backend port is `3000`):
 
 ```bash
 docker run -p 3000:3000 \
@@ -54,7 +54,17 @@ cd centroid-tracker-frontend
 npm install
 ```
 
-### 4. Start the Development Server
+### 4. Configure Environment Variables
+
+Create a `.env.local` file in the root directory to set the backend API URL:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+**Note:** If your backend runs on a different port or domain, update `NEXT_PUBLIC_API_URL` accordingly. This is the single source of truth for all API endpoints.
+
+### 5. Start the Development Server
 
 ```bash
 npm run dev
@@ -64,12 +74,25 @@ This frontend will run on **[http://localhost:3001](http://localhost:3001)**.
 
 ---
 
-## Notes
+## Configuration
 
-* Frontend runs on **port 3001**
-* Backend runs on **port 3000**
-* Make sure to start the backend (via Docker) before the frontend
-* Keep these ports in mind if integrating into other systems
+### Environment Variables
+
+All API endpoints use the `NEXT_PUBLIC_API_URL` environment variable defined in `.env.local`:
+
+* **`NEXT_PUBLIC_API_URL`**: Base URL for the backend API (default: `http://localhost:3000`)
+
+To change the backend URL:
+1. Edit `.env.local`
+2. Restart the dev server
+
+### Port Configuration
+
+* **Frontend**: Runs on port `3001` (configured in `package.json`)
+* **Backend**: Runs on port `3000` (or as specified in `NEXT_PUBLIC_API_URL`)
+
+Make sure these ports are available or adjust as needed. Always start the backend (via Docker) before the frontend.
 
 ---
+
 
