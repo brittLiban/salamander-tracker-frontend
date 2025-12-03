@@ -79,11 +79,11 @@ export default function JobsPage() {
 
 
                                         <a
-                                            href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/results/${job.id}.csv`
+                                            href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/results/${job.id}.csv`}
                                             download
                                             style={{ textDecoration: 'none', color: '#1976d2' }}
                                         >
-                                            Donwload
+                                            Download
                                         </a>
                                     </TableCell>
                                 </TableRow>
