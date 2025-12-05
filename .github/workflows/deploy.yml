@@ -1,16 +1,31 @@
-name: Deploy Updates to VM
+name: Update VM packages
 
 on:
   push:
     branches:
-      - deployment-to-vm   
+      - deployment-to-vm
   workflow_dispatch:
-  
+
 jobs:
   update_vm:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Validate secrets
+        run: |
+          if [ -z "${{ secrets.VM_HOST }}" ]; then
+            echo " ERROR: VM_HOST secret is missing!"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VM_USER }}" ]; then
+            echo " ERROR: VM_USER secret is missing!"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VM_SSH_KEY }}" ]; then
+            echo " ERROR: VM_SSH_KEY secret is missing!"
+            exit 1
+          fi
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
