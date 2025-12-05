@@ -25,7 +25,7 @@ jobs:
         - name: Deploy to VM
           run: |
                 ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.VM_PORT }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
-                cd ~/salamander-frontend || exit
+                cd ~/Salamander-frontend || exit
                 git pull origin main
                 docker compose down
                 docker compose up -d --build
