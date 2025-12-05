@@ -4,6 +4,7 @@ on:
     push:
         branches:
         - main
+        - deployment-to-vm
     workflow_dispatch:
     
 jobs:
