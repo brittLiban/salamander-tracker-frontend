@@ -28,6 +28,7 @@ jobs:
                 cd ~/Salamander-Deployment || exit
                 cd salamander-tracker-frontend || exit
                 git pull origin main
+                cd ..
                 docker compose down
                 docker compose up -d --build
                 EOF
